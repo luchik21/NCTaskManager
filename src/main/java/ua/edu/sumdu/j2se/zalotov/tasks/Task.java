@@ -13,6 +13,9 @@ public class Task {
         this.title = title;
         this.time = time;
         isRepeated = false;
+        if (time < 0) {
+            throw new IllegalArgumentException("Time can not be less than 0");
+        }
     }
 
     public Task(String title, int start, int end, int interval) {
@@ -21,6 +24,12 @@ public class Task {
         this.end = end;
         this.interval = interval;
         isRepeated = true;
+        if (start < 0 || end < 0) {
+            throw new IllegalArgumentException("Time can not be less than 0");
+        }
+        if (interval < 0) {
+            throw new IllegalArgumentException("Interval cant be less than 0");
+        }
     }
 
     public String getTitle() {

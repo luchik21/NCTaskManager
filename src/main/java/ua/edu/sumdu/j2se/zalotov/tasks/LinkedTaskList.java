@@ -1,11 +1,10 @@
 package ua.edu.sumdu.j2se.zalotov.tasks;
 
-public class LinkedTaskList {
+public class LinkedTaskList extends AbstractTaskList {
 
     static class Node {
         Task task;
         Node next;
-
         public Node(Task task) {
             this.task = task;
         }
@@ -73,13 +72,9 @@ public class LinkedTaskList {
         return size;
     }
 
-    public LinkedTaskList incoming(int from, int to) {
-        LinkedTaskList linkedTaskList = new LinkedTaskList();
-        for (int i = 0; i < size; i++) {
-            if (getTask(i).nextTimeAfter(getTask(i).getTime()) > from && getTask(i).nextTimeAfter(getTask(i).getTime()) < to) {
-                linkedTaskList.add(getTask(i));
-            }
-        }
-        return linkedTaskList;
+    @Override
+    public ListTypes.types getType() {
+        return ListTypes.types.LINKED;
     }
+
 }

@@ -2,7 +2,7 @@ package ua.edu.sumdu.j2se.zalotov.tasks;
 
 import java.util.Arrays;
 
-public class ArrayTaskList {
+public class ArrayTaskList extends AbstractTaskList{
 
     private int size = 0;
 
@@ -43,13 +43,8 @@ public class ArrayTaskList {
         return tasks[index];
     }
 
-    public ArrayTaskList incoming(int from, int to) {
-        ArrayTaskList arrayTaskList = new ArrayTaskList();
-        for (int i = 0; i < size; i++) {
-            if (tasks[i].nextTimeAfter(tasks[i].getTime()) > from && tasks[i].nextTimeAfter(tasks[i].getTime()) < to) {
-                arrayTaskList.add(tasks[i]);
-            }
-        }
-        return arrayTaskList;
+    @Override
+    public ListTypes.types getType() {
+        return ListTypes.types.ARRAY;
     }
 }

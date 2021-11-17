@@ -1,6 +1,8 @@
 package ua.edu.sumdu.j2se.zalotov.tasks;
 
-public class Task {
+import java.util.Objects;
+
+public class Task implements Cloneable {
     private String title;
     private int start;
     private int time;
@@ -139,5 +141,36 @@ public class Task {
             }
         }
         return -1;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return start == task.start && time == task.time && end == task.end && interval == task.interval && isActive == task.isActive && isRepeated == task.isRepeated && Objects.equals(title, task.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, start, time, end, interval, isActive, isRepeated);
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "title='" + title + '\'' +
+                ", start=" + start +
+                ", time=" + time +
+                ", end=" + end +
+                ", interval=" + interval +
+                ", isActive=" + isActive +
+                ", isRepeated=" + isRepeated +
+                '}';
     }
 }

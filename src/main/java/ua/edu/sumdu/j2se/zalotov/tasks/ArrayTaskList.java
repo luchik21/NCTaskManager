@@ -1,8 +1,9 @@
 package ua.edu.sumdu.j2se.zalotov.tasks;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
-public class ArrayTaskList extends AbstractTaskList{
+public class ArrayTaskList extends AbstractTaskList implements Iterable<Task>, Cloneable {
 
     private int size = 0;
 
@@ -10,18 +11,19 @@ public class ArrayTaskList extends AbstractTaskList{
 
     public void add(Task task) {
         if (tasks[tasks.length - 1] != null) {
-            tasks = Arrays.copyOf(tasks, tasks.length * 2);
-        }
-        size++;
-        for (int i = 0; i < size; i++) {
-            if (tasks[i] == null) {
-                tasks[i] = task;
+            tasks = Arrays.copyOf(tasks, tasks.length + size);
+        } else {
+            size++;
+            for (int i = 0; i < size; i++) {
+                if (tasks[i] == null) {
+                    tasks[i] = task;
+                }
             }
         }
     }
 
     public boolean remove(Task task) {
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < tasks.length; i++) {
             if (tasks[i].equals(task)) {
                 System.arraycopy(tasks, i + 1, tasks, i, tasks.length - 1 - i);
                 size--;
@@ -46,5 +48,44 @@ public class ArrayTaskList extends AbstractTaskList{
     @Override
     public ListTypes.types getType() {
         return ListTypes.types.ARRAY;
+    }
+
+    @Override
+    public Iterator<Task> iterator() {
+        Iterator<Task> ArrayIterator = new Iterator<Task>() {
+            private int current = 0;
+
+            @Override
+            public boolean hasNext() {
+                return getTask(current) != null;
+            }
+
+            @Override
+            public Task next() {
+                return getTask(current++);
+            }
+
+            @Override
+            public void remove() throws IllegalStateException {
+                ArrayTaskList arrayTaskList = new ArrayTaskList();
+                if (current == 0) {
+                    throw new IllegalStateException();
+                } else {
+                    arrayTaskList.tasks = tasks;
+                    Task tasksVoid = getTask(--current);
+                    arrayTaskList.remove(tasksVoid);
+                    tasks = Arrays.copyOf(tasks, tasks.length - 1);
+                }
+            }
+        };
+        return ArrayIterator;
+    }
+
+    @Override
+    public String toString() {
+        return "ArrayTaskList{" +
+                "size=" + size +
+                ", tasks=" + Arrays.toString(tasks) +
+                '}';
     }
 }

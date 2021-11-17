@@ -1,16 +1,28 @@
 package ua.edu.sumdu.j2se.zalotov.tasks;
 
-public class LinkedTaskList extends AbstractTaskList {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class LinkedTaskList extends AbstractTaskList implements Iterable<Task>, Cloneable {
 
     static class Node {
         Task task;
         Node next;
+
         public Node(Task task) {
             this.task = task;
         }
 
         public Task getTaskData() {
             return this.task;
+        }
+
+        public Node getNext() {
+            return next;
+        }
+
+        public void setNext(Node next) {
+            this.next = next;
         }
     }
 
@@ -77,4 +89,56 @@ public class LinkedTaskList extends AbstractTaskList {
         return ListTypes.types.LINKED;
     }
 
+    @Override
+    public Iterator<Task> iterator() {
+        Iterator<Task> LinkedIterator = new Iterator<Task>() {
+            Node curr = first;
+            Node prev = null;
+            Node beforePrev = null;
+            boolean removeCalled = false;
+
+            @Override
+            public boolean hasNext() {
+                return curr != null;
+            }
+
+            @Override
+            public Task next() {
+                if (curr == null) {
+                    throw new NoSuchElementException();
+                }
+                Task tas = curr.getTaskData();
+                beforePrev = prev;
+                prev = curr;
+                curr = curr.getNext();
+                removeCalled = false;
+                return tas;
+            }
+
+            @Override
+            public void remove() {
+                if (prev == null || removeCalled) {
+                    throw new IllegalStateException();
+                }
+                if (beforePrev == null) {
+                    first = curr;
+                } else {
+                    beforePrev.setNext(curr);
+                    prev = beforePrev;
+                }
+                size--;
+                removeCalled = true;
+            }
+        };
+        return LinkedIterator;
+    }
+
+    @Override
+    public String toString() {
+        return "LinkedTaskList{" +
+                "first=" + first +
+                ", last=" + last +
+                ", size=" + size +
+                '}';
+    }
 }

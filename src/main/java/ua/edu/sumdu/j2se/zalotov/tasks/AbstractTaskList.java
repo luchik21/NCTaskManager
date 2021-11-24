@@ -2,6 +2,7 @@ package ua.edu.sumdu.j2se.zalotov.tasks;
 
 
 import java.util.Iterator;
+import java.util.stream.Stream;
 
 abstract class AbstractTaskList implements Iterable<Task>, Cloneable {
 
@@ -13,19 +14,15 @@ abstract class AbstractTaskList implements Iterable<Task>, Cloneable {
 
     public abstract int size();
 
-    public AbstractTaskList incoming(int from, int to) {
+    public final AbstractTaskList incoming(int from, int to) {
         AbstractTaskList taskList = TaskListFactory.createTaskList(getType());
-        Task task;
-        for (int i = 0; i < taskList.size(); i++) {
-            task = taskList.getTask(i);
-            if (task.nextTimeAfter(task.getStartTime()) > from && task.nextTimeAfter(task.getEndTime()) < to) {
-                taskList.add(task);
-            }
-        }
+        this.getStream().filter(task -> task != null && task.nextTimeAfter(from) != -1 && task.getStartTime() > from && task.getEndTime() < to).forEach(taskList::add);
         return taskList;
     }
 
     public abstract ListTypes.types getType();
+
+    public abstract Stream<Task> getStream();
 
     @Override
     public int hashCode() {

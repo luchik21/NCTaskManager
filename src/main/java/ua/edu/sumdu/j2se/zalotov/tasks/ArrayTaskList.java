@@ -2,6 +2,7 @@ package ua.edu.sumdu.j2se.zalotov.tasks;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.stream.Stream;
 
 public class ArrayTaskList extends AbstractTaskList implements Iterable<Task>, Cloneable {
 
@@ -48,6 +49,11 @@ public class ArrayTaskList extends AbstractTaskList implements Iterable<Task>, C
     @Override
     public ListTypes.types getType() {
         return ListTypes.types.ARRAY;
+    }
+
+    @Override
+    public Stream<Task> getStream() {
+        return Stream.of(tasks);
     }
 
     @Override

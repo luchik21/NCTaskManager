@@ -2,6 +2,7 @@ package ua.edu.sumdu.j2se.zalotov.tasks;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.stream.Stream;
 
 public class LinkedTaskList extends AbstractTaskList implements Iterable<Task>, Cloneable {
 
@@ -87,6 +88,15 @@ public class LinkedTaskList extends AbstractTaskList implements Iterable<Task>, 
     @Override
     public ListTypes.types getType() {
         return ListTypes.types.LINKED;
+    }
+
+    @Override
+    public Stream<Task> getStream() {
+        Task[] tasks = new Task[this.size()];
+        for (int i = 0; i < this.size(); i++) {
+            tasks[i] = this.getTask(i);
+        }
+        return Stream.of(tasks);
     }
 
     @Override

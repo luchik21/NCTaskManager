@@ -1,32 +1,33 @@
 package ua.edu.sumdu.j2se.zalotov.tasks;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Task implements Cloneable {
     private String title;
-    private int start;
-    private int time;
-    private int end;
+    private LocalDateTime start;
+    private LocalDateTime time;
+    private LocalDateTime end;
     private int interval;
     private boolean isActive;
     private boolean isRepeated;
 
-    public Task(String title, int time) {
+    public Task(String title, LocalDateTime time) {
         this.title = title;
         this.time = time;
         isRepeated = false;
-        if (time < 0) {
-            throw new IllegalArgumentException("Time can not be less than 0");
+        if (time == null) {
+            throw new IllegalArgumentException("Time can not be null");
         }
     }
 
-    public Task(String title, int start, int end, int interval) {
+    public Task(String title, LocalDateTime start, LocalDateTime end, int interval) {
         this.title = title;
         this.start = start;
         this.end = end;
         this.interval = interval;
         isRepeated = true;
-        if (start < 0 || end < 0) {
+        if (start == null || end == null) {
             throw new IllegalArgumentException("Time can not be less than 0");
         }
         if (interval < 0) {
@@ -42,32 +43,32 @@ public class Task implements Cloneable {
         this.title = title;
     }
 
-    public int getStartTime() {
+    public LocalDateTime getStartTime() {
         if (isRepeated) {
             return start;
         }
         return time;
     }
 
-    public void setStart(int start) {
+    public void setStart(LocalDateTime start) {
         this.start = start;
     }
 
-    public int getTime() {
+    public LocalDateTime getTime() {
         if (isRepeated) {
             return start;
         }
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(LocalDateTime time) {
         if (isRepeated()) {
             setRepeated(false);
         }
         this.time = time;
     }
 
-    public void setTime(int start, int end, int interval) {
+    public void setTime(LocalDateTime start, LocalDateTime end, int interval) {
         if (!isRepeated()) {
             setRepeated(true);
         }
@@ -76,14 +77,14 @@ public class Task implements Cloneable {
         this.interval = interval;
     }
 
-    public int getEndTime() {
+    public LocalDateTime getEndTime() {
         if (isRepeated) {
             return end;
         }
         return time;
     }
 
-    public void setEnd(int end) {
+    public void setEnd(LocalDateTime end) {
         this.end = end;
     }
 
@@ -118,29 +119,29 @@ public class Task implements Cloneable {
         return 0;
     }
 
-    public int nextTimeAfter(int current) {
+    public LocalDateTime nextTimeAfter(LocalDateTime current) {
         if (isActive()) {
             if (!isRepeated()) {
-                if (current < getTime()) {
+                if (current.isBefore(getTime())) {
                     return getTime();
                 }
-                return -1;
+                return null;
             } else if (isRepeated()) {
-                if (current < getStartTime()) {
+                if (current.isBefore(getStartTime())) {
                     return getStartTime();
-                } else if (getStartTime() <= current) {
-                    int count = start;
-                    while (count <= current) {
-                        count += interval;
+                } else if (getStartTime().isBefore(current) || getStartTime().isEqual(current)) {
+                    LocalDateTime nextTime = getStartTime();
+                    while (nextTime.isBefore(current) || nextTime.isEqual(current)) {
+                        nextTime = nextTime.plusSeconds(getRepeatInterval());
                     }
-                    if (count > getEndTime()) {
-                        return -1;
+                    if (nextTime.isAfter(getEndTime())) {
+                        return null;
                     }
-                    return count;
+                    return nextTime;
                 }
             }
         }
-        return -1;
+        return null;
     }
 
     @Override

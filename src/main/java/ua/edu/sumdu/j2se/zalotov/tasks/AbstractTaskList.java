@@ -1,10 +1,11 @@
 package ua.edu.sumdu.j2se.zalotov.tasks;
 
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
-abstract class AbstractTaskList implements Iterable<Task>, Cloneable {
+abstract class AbstractTaskList implements Iterable<Task>, Cloneable, Serializable {
 
     public abstract void add(Task task);
 

@@ -14,7 +14,6 @@ public class Tasks {
     public static SortedMap<LocalDateTime, Set<Task>> calendar(Iterable<Task> tasks, LocalDateTime start, LocalDateTime end) {
         SortedMap<LocalDateTime, Set<Task>> map = new TreeMap<>();
         for (Task task : tasks) {
-            if (task.isActive()) {
                 LocalDateTime time = task.nextTimeAfter(start.minusNanos(1));
                 while (time != null && !time.isAfter(end)) {
                     if (map.containsKey(time)) {
@@ -26,7 +25,6 @@ public class Tasks {
                     }
                     time = task.nextTimeAfter(time);
                 }
-            }
         }
         return map;
     }

@@ -1,4 +1,4 @@
-package ua.edu.sumdu.j2se.zalotov.tasks;
+package ua.edu.sumdu.j2se.zalotov.tasks.Model;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

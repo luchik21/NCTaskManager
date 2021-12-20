@@ -1,4 +1,4 @@
-package ua.edu.sumdu.j2se.zalotov.tasks;
+package ua.edu.sumdu.j2se.zalotov.tasks.Model;
 
 public class TaskListFactory {
     public static AbstractTaskList createTaskList(ListTypes.types type) {

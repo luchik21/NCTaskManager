@@ -1,4 +1,6 @@
-package ua.edu.sumdu.j2se.zalotov.tasks;
+package ua.edu.sumdu.j2se.zalotov.tasks.Model;
+
+import ua.edu.sumdu.j2se.zalotov.tasks.Model.Task;
 
 import java.time.LocalDateTime;
 import java.util.*;

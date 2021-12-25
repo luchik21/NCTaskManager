@@ -18,6 +18,7 @@ public class AddTaskView implements View{
         System.out.println("Task type");
         System.out.println("1 - non repeatable");
         System.out.println("2 - repeatable");
+        System.out.println("3 - back to menu");
         int taskType = 0;
         try {
             String indexIn = reader.readLine();

@@ -28,6 +28,7 @@ public class AddTaskController extends Controller {
                 return ADD_TASK_ACTION;
             }
             Task task1 = new Task(title, time);
+            task1.setActive(true);
             taskList.add(task1);
         } else if (taskChoose == 2) {
             String title = ((AddTaskView) view).nameTask();
@@ -47,6 +48,7 @@ public class AddTaskController extends Controller {
             }
             int interval = ((AddTaskView) view).repeatInterval();
             Task task2 = new Task(title, timeStart, timeEnd, interval);
+            task2.setActive(true);
             taskList.add(task2);
         } else if (taskChoose == 3) { //выход в меню
             return MAIN_MENU_ACTION;

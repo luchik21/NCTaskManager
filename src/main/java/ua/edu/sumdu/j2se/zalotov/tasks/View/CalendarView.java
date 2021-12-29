@@ -11,19 +11,23 @@ import java.time.format.DateTimeFormatter;
 import java.util.Set;
 import java.util.SortedMap;
 
-public class CalendarView implements View{
+public class CalendarView implements View {
     @Override
     public int printInfo(AbstractTaskList taskList) {
         LocalDateTime startTime = timeTaskStart();
+        if(startTime.isBefore(LocalDateTime.now())){
+            System.out.println("entered date is earlier than now");
+            return Controller.CALENDAR_ACTION;
+        }
         LocalDateTime endTime = timeTaskEnd();
         if ((endTime.isBefore(LocalDateTime.now()))) {
-            System.out.println("date after now");
+            System.out.println("entered date is earlier than now");
             return Controller.CALENDAR_ACTION;
         }
         SortedMap<LocalDateTime, Set<Task>> calendarView = Tasks.calendar(taskList, startTime, endTime);
         for (SortedMap.Entry<LocalDateTime, Set<Task>> element : calendarView.entrySet()) {
             for (Task task : element.getValue()) {
-                System.out.print("title = " + task.getTitle() + "-->");
+                System.out.print("Task -> " + task.getTitle() + ", scheduled time = ");
             }
             System.out.println(element.getKey() + "\n");
         }
@@ -68,11 +72,11 @@ public class CalendarView implements View{
         return end;
     }
 
-    public int calendarFor7Days(AbstractTaskList taskList){
+    public int calendarFor7Days(AbstractTaskList taskList) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime startTime = LocalDateTime.now();
         LocalDateTime endTime = startTime.plusDays(7);
-        System.out.println("Your calendar from "+startTime.format(formatter)+" to "+endTime.format(formatter));
+        System.out.println("Your calendar from " + startTime.format(formatter) + " to " + endTime.format(formatter));
         SortedMap<LocalDateTime, Set<Task>> calendarView = Tasks.calendar(taskList, startTime, endTime);
         for (SortedMap.Entry<LocalDateTime, Set<Task>> element : calendarView.entrySet()) {
             for (Task task : element.getValue()) {

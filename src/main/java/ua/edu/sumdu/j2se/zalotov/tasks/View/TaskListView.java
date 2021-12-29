@@ -10,9 +10,9 @@ public class TaskListView implements View {
             System.out.println("dont have any tasks");
             return Controller.MAIN_MENU_ACTION;
         } else {
-            System.out.println("task list");
+            System.out.println("Your task list:");
             for (int i = 0; i < taskList.size(); i++) {
-                System.out.println("№" + i + ". " + taskList.getTask(i));
+                System.out.println("Index:" + i + ", " + taskList.getTask(i));
             }
         }
         return Controller.MAIN_MENU_ACTION;

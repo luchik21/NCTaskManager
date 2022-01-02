@@ -7,7 +7,7 @@ public class TaskListView implements View {
     @Override
     public int printInfo(AbstractTaskList taskList) {
         if (taskList.size() == 0) {
-            System.out.println("dont have any tasks");
+            System.out.println("You dont have any tasks");
             return Controller.MAIN_MENU_ACTION;
         } else {
             System.out.println("Your task list:");

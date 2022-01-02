@@ -1,6 +1,7 @@
 package ua.edu.sumdu.j2se.zalotov.tasks.View;
 
 import ua.edu.sumdu.j2se.zalotov.tasks.Model.AbstractTaskList;
+import ua.edu.sumdu.j2se.zalotov.tasks.Model.Error;
 
 import java.io.IOException;
 
@@ -19,10 +20,15 @@ public class MainView implements View {
         int variant = 0;
         try {
             variant = Integer.parseInt(reader.readLine());
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException | NumberFormatException e) {
+            System.out.println(Error.WRONG_NUMBER);
         }
-        return variant;
+        if (variant >= 0 && variant <= 7) {
+            return variant;
+        } else {
+            System.out.println(Error.WRONG_NUMBER);
+            return 0;
+        }
     }
 }
 

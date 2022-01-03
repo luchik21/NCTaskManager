@@ -58,7 +58,7 @@ public class AddTaskView implements View{
     }
 
     public int repeatInterval() {
-        System.out.println("Interval");
+        System.out.println("Enter interval in minutes");
         int interval = 0;
         try {
             String time = reader.readLine();
@@ -66,7 +66,7 @@ public class AddTaskView implements View{
         } catch (IOException e) {
             System.out.println(Error.UNEXPECTED_INTERVAL);
         }
-        return interval;
+        return interval*60;
     }
 
     private LocalDateTime time(){

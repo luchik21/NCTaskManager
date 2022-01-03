@@ -21,28 +21,35 @@ public class SaveLoadTaskController extends Controller {
 
     @Override
     public int process(AbstractTaskList taskList) {
+        logger.debug("enter to save load task controller");
         int taskChoose = ((SaveLoadTaskView) view).taskChoose();
         File directory = new File("saves");
         directory.mkdir();
         if (taskChoose == 1) {
+            logger.debug("save tasks to file");
             try {
                 String nameFile = ((SaveLoadTaskView) view).fileName(); //имя файла
                 TaskIO.write(taskList, new FileWriter("saves/" + nameFile + ".json")); // сохранение в json
+                logger.debug("success saved");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else if (taskChoose == 2) {
+            logger.debug("load tasks from file");
             try {
                 String nameFile = ((SaveLoadTaskView) view).fileName();   //файл для загрузки сохранений
                 TaskIO.read(taskList, new FileReader("saves/" + nameFile + ".json"));
+                logger.debug("success loaded");
             } catch (IOException e) {
                 System.out.println(Error.FILE_NOT_FOUND);
                 return Controller.SAVE_LOAD_ACTION;
             }
         } else if (taskChoose == 3) {
+            logger.debug("exit from save load task controller");
             return Controller.MAIN_MENU_ACTION;
         } else {
             System.out.println(Error.WRONG_NUMBER);
+            logger.debug("exit from save load task controller");
             return Controller.SAVE_LOAD_ACTION;
         }
         return view.printInfo(taskList);

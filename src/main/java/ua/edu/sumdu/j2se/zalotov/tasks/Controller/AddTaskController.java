@@ -18,8 +18,10 @@ public class AddTaskController extends Controller {
 
     @Override
     public int process(AbstractTaskList taskList) {
+        logger.debug("enter to add task controller");
         int taskChoose = ((AddTaskView) view).taskChoose();
         if (taskChoose == 1) {//не повторяемое
+            logger.debug("add not repeated task");
             String title = ((AddTaskView) view).nameTask();
             if (title.isEmpty()) {
                 System.out.println(Error.EMPTY_NAME);
@@ -33,7 +35,9 @@ public class AddTaskController extends Controller {
             Task task1 = new Task(title, time);
             task1.setActive(true);
             taskList.add(task1);
+            logger.debug("exit from add task controller with new task");
         } else if (taskChoose == 2) {//повтор
+            logger.debug("add repeated task");
             String title = ((AddTaskView) view).nameTask();
             if (title.isEmpty()) {
                 System.out.println(Error.EMPTY_NAME);
@@ -53,10 +57,13 @@ public class AddTaskController extends Controller {
             Task task2 = new Task(title, timeStart, timeEnd, interval);
             task2.setActive(true);
             taskList.add(task2);
+            logger.debug("exit from add task controller with new task");
         } else if (taskChoose == 3) { //выход в меню
+            logger.debug("exit from add task controller");
             return MAIN_MENU_ACTION;
         } else {
             System.out.println(Error.WRONG_NUMBER);
+            logger.debug("exit from add task controller");
             return Controller.MAIN_MENU_ACTION;
         }
         return view.printInfo(taskList);

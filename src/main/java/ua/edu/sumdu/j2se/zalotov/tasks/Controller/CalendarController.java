@@ -15,15 +15,20 @@ public class CalendarController extends Controller {
 
     @Override
     public int process(AbstractTaskList taskList) {
+        logger.debug("enter to calendar controller");
         int taskChoose = ((CalendarView) view).taskChoose();
         if (taskChoose == 1) {
+            logger.debug("see calendar from () to ()");
             return view.printInfo(taskList);
         } else if (taskChoose == 2) {
+            logger.debug("see calendar for 7 days");
             return  ((CalendarView) view).calendarFor7Days(taskList);
         }  else if (taskChoose == 3) {
+            logger.debug("exit from calendar controller");
             return MAIN_MENU_ACTION;
         } else {
             System.out.println(Error.WRONG_NUMBER);
+            logger.debug("exit from calendar controller");
             return CALENDAR_ACTION;
         }
     }

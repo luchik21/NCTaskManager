@@ -17,8 +17,10 @@ public class ChangeTaskController extends Controller {
 
     @Override
     public int process(AbstractTaskList taskList) {
+        logger.debug("enter to change task controller");
         int taskChoose = ((ChangeTaskView) view).taskChoose();
         if (taskChoose == 1) {
+            logger.debug("change repeated task param");
             int index = ((ChangeTaskView) view).index(); //индекс задания
             if (taskList.size() <= 0 || taskList.size() - 1 < index) {
                 System.out.println(Error.WRONG_INDEX);
@@ -48,9 +50,11 @@ public class ChangeTaskController extends Controller {
                     }
                     taskList.getTask(index).setInterval(interval);
                 } else if (taskChooseRep == 4) {
-                    return CHANGE_TASK_ACTION;
+                    logger.debug("exit from change task controller");
+                    return MAIN_MENU_ACTION;
                 }
             } else {//задание без повтора
+                logger.debug("change non repeated task param");
                 int taskChooseNon = ((ChangeTaskView) view).taskChooseNon();
                 if (taskChooseNon == 1) {
                     nameChange(index, taskList);//имя
@@ -63,7 +67,8 @@ public class ChangeTaskController extends Controller {
                     taskList.getTask(index).setTime(time);
                     return CHANGE_TASK_ACTION;
                 } else if (taskChooseNon == 3) {
-                    return Controller.CHANGE_TASK_ACTION;
+                    logger.debug("exit from change task controller");
+                    return Controller.MAIN_MENU_ACTION;
                 } else {
                     System.out.println(Error.WRONG_NUMBER);
                     return CHANGE_TASK_ACTION;
@@ -71,9 +76,11 @@ public class ChangeTaskController extends Controller {
                 return CHANGE_TASK_ACTION;
             }
         } else if (taskChoose == 2) { //выход в меню
+            logger.debug("exit from change task controller");
             return MAIN_MENU_ACTION;
         } else {
             System.out.println(Error.WRONG_NUMBER);
+            logger.debug("exit from change task controller");
             return CHANGE_TASK_ACTION;
         }
         return view.printInfo(taskList);

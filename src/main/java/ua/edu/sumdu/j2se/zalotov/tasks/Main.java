@@ -19,7 +19,7 @@ public class Main {
         View mainView = new MainView();
         Controller mainController = new MainController(taskList, mainView);
         mainController.process(null);
-        System.out.println("Manager close");
+        System.out.println("Manager closed");
         log.info("Close manager");
     }
 }

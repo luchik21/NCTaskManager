@@ -22,6 +22,9 @@ public class MainController extends Controller {
         controllers.add(new CalendarController(new CalendarView(), Controller.CALENDAR_ACTION));
         controllers.add(new ChangeTaskController(new ChangeTaskView(), Controller.CHANGE_TASK_ACTION));
         controllers.add(new SaveLoadTaskController(new SaveLoadTaskView(),Controller.SAVE_LOAD_ACTION));
+        NotificationController notification = new NotificationController(new NotificationView(), taskList);
+        notification.setDaemon(true);
+        notification.start();
     }
 
     @Override

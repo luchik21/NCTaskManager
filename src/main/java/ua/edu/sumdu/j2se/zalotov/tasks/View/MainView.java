@@ -9,7 +9,7 @@ public class MainView implements View {
 
     @Override
     public int printInfo(AbstractTaskList taskList) {
-        System.out.println("choose action");
+        System.out.println("Choose action:");
         System.out.println("1 add new task");
         System.out.println("2 remove task");
         System.out.println("3 see tasks");

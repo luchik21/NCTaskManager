@@ -15,7 +15,7 @@ public class RemoveTaskView implements View{
         return Controller.MAIN_MENU_ACTION;
     }
 
-    public int removeTask() {
+    public int removeTask() {//удаление задания по индексу
         System.out.println("Index of task, from 0");
         int index = 0;
         try {

@@ -15,8 +15,7 @@ public class ChangeTaskView implements View {
         return Controller.MAIN_MENU_ACTION;
     }
 
-
-    public int taskChoose() {
+    public int taskChoose() {//выбор пункта меню
         System.out.println("1 change task param,  2 back to menu");
         int taskType = 0;
         try {
@@ -28,7 +27,7 @@ public class ChangeTaskView implements View {
         return taskType;
     }
 
-    public int index() {
+    public int index() {//индекс задания
         System.out.print("Enter task index: ");
         int index = 0;
         try {
@@ -40,7 +39,7 @@ public class ChangeTaskView implements View {
         return index;
     }
 
-    public int taskChooseNon() {
+    public int taskChooseNon() {//не повтор задание
         System.out.println("1 - change name,  2 - change date,  3 - back");
         int taskType = 0;
         try {
@@ -52,7 +51,7 @@ public class ChangeTaskView implements View {
         return taskType;
     }
 
-    public int taskChooseRep() {
+    public int taskChooseRep() {//повтор задание
         System.out.println("1 - change name,  2 - change date,  3 - change interval,  4 - back");
         int taskType = 0;
         try {
@@ -64,7 +63,7 @@ public class ChangeTaskView implements View {
         return taskType;
     }
 
-    public int interval() {
+    public int interval() {//задаем интервал
         System.out.print("Enter interval: ");
         int interval = 0;
         try {
@@ -76,22 +75,22 @@ public class ChangeTaskView implements View {
         return interval;
     }
 
-    public LocalDateTime timeTask() {
+    public LocalDateTime timeTask() {//задаем время
         System.out.print("Enter new date (example: 2021-12-12 12:00): ");
         return time();
     }
 
-    public LocalDateTime timeTaskStart() {
+    public LocalDateTime timeTaskStart() {//задаем время
         System.out.print("Enter new start date (example: 2021-12-12 12:00): ");
         return time();
     }
 
-    public LocalDateTime timeTaskEnd() {
+    public LocalDateTime timeTaskEnd() {//задаем время
         System.out.print("Enter new end date (example: 2021-12-12 12:00): ");
         return time();
     }
 
-    public String titleNew() {
+    public String titleNew() {//задаем новое название
         System.out.print("Enter new title: ");
         String name = "";
         try {
@@ -102,7 +101,7 @@ public class ChangeTaskView implements View {
         return name;
     }
 
-    private LocalDateTime time() {
+    private LocalDateTime time() {//время
         String date = "";
         try {
             date = reader.readLine();

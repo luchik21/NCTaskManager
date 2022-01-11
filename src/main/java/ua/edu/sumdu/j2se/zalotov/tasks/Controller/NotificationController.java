@@ -24,14 +24,14 @@ public class NotificationController extends Thread {
     public void run() {
         while (true) {
             boolean flag = false;
-            LocalDateTime now = LocalDateTime.now().withSecond(0).withNano(0);
+            LocalDateTime now = LocalDateTime.now().withSecond(0).withNano(0);//текущее время
             LocalDateTime end = LocalDateTime.now().withSecond(0).withNano(0).plusYears(1);
             String title;
             SortedMap<LocalDateTime, Set<Task>> calendarView = Tasks.calendar(taskList, now, end);
             for (SortedMap.Entry<LocalDateTime, Set<Task>> element : calendarView.entrySet()) {
                 for (Task task : element.getValue()) {
                     title = task.getTitle();
-                    if (element.getKey().isEqual(now)) {
+                    if (element.getKey().isEqual(now)) {//сравнение текущего и времени выполнения заданий
                         view.printInfo(element.getKey(), title);
                         flag = true;
                     }

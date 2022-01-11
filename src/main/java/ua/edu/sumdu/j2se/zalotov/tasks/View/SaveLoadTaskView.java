@@ -8,7 +8,7 @@ import java.io.IOException;
 public class SaveLoadTaskView implements View {
     int info;
     @Override
-    public int printInfo(AbstractTaskList taskList) {
+    public int printInfo(AbstractTaskList taskList) {//инфо
         if (info == 1) {
             System.out.println("Tasks saved");
             return Controller.FINISH_ACTION;
@@ -18,7 +18,7 @@ public class SaveLoadTaskView implements View {
         return Controller.MAIN_MENU_ACTION;
     }
 
-    public int taskChoose() {
+    public int taskChoose() {//выбор из пунктов меню
         System.out.println("Save and load");
         System.out.println("1 - save to file and exit,  2 - load from file,  3 - back to menu");
         int taskType=0;
@@ -31,7 +31,7 @@ public class SaveLoadTaskView implements View {
         return taskType;
     }
 
-    public String fileName() {
+    public String fileName() {//задаем имя файла
         String name = "";
         try {
             System.out.println("enter file name");

@@ -26,7 +26,7 @@ public class ChangeTaskController extends Controller {
                 System.out.println(Error.WRONG_INDEX);
                 return CHANGE_TASK_ACTION;
             }
-            if (taskList.getTask(index).isRepeated()) { // повтор
+            if (taskList.getTask(index).isRepeated()) { // повторяемое
                 int taskChooseRep = ((ChangeTaskView) view).taskChooseRep();//меню
                 if (taskChooseRep == 1) {
                     nameChange(index, taskList);//имя
@@ -49,7 +49,7 @@ public class ChangeTaskController extends Controller {
                         return CHANGE_TASK_ACTION;
                     }
                     taskList.getTask(index).setInterval(interval);
-                } else if (taskChooseRep == 4) {
+                } else if (taskChooseRep == 4) {//выход в меню
                     logger.debug("exit from change task controller");
                     return MAIN_MENU_ACTION;
                 }
@@ -64,9 +64,9 @@ public class ChangeTaskController extends Controller {
                         System.out.println(Error.UNEXPECTED_TIME);
                         return CHANGE_TASK_ACTION;
                     }
-                    taskList.getTask(index).setTime(time);
+                    taskList.getTask(index).setTime(time);//время
                     return CHANGE_TASK_ACTION;
-                } else if (taskChooseNon == 3) {
+                } else if (taskChooseNon == 3) {//выход в меню
                     logger.debug("exit from change task controller");
                     return Controller.MAIN_MENU_ACTION;
                 } else {
@@ -86,7 +86,7 @@ public class ChangeTaskController extends Controller {
         return view.printInfo(taskList);
     }
 
-    private void nameChange(int index, AbstractTaskList taskList) {
+    private void nameChange(int index, AbstractTaskList taskList) {//получаем новое имя и заменяем
         String titleNew = ((ChangeTaskView) view).titleNew();
         taskList.getTask(index).setTitle(titleNew);
     }

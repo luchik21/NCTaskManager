@@ -17,9 +17,9 @@ public class RemoveTaskController extends Controller {
     @Override
     public int process(AbstractTaskList taskList) {
         logger.debug("enter to remove task controller");
-        int index = ((RemoveTaskView) view).removeTask();
-        if (taskList.size() > 0 & index >= 0 & taskList.getTask(index) != null) {
-            taskList.remove(taskList.getTask(index));
+        int index = ((RemoveTaskView) view).removeTask();//индекс задания
+        if (taskList.size() > 0 & index >= 0 & taskList.getTask(index) != null) {//проверка
+            taskList.remove(taskList.getTask(index));//удаление
             logger.debug("remove task");
         } else {
             System.out.println(Error.WRONG_INDEX);

@@ -13,7 +13,7 @@ public class TaskListController extends Controller{
     }
 
     @Override
-    public int process(AbstractTaskList taskList) {
+    public int process(AbstractTaskList taskList) {//просмотр всех заданий
         logger.debug("see all tasks");
         return view.printInfo(taskList);
     }

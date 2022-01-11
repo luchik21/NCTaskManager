@@ -16,25 +16,25 @@ import java.util.SortedMap;
 public class CalendarView implements View {
     @Override
     public int printInfo(AbstractTaskList taskList) {
-        if (taskList.size() == 0) {
+        if (taskList.size() == 0) {//проверка
             System.out.println("You dont have any tasks");
             return Controller.MAIN_MENU_ACTION;
         }
         LocalDateTime startTime = timeTaskStart();
-        if (startTime.isBefore(LocalDateTime.now())) {
+        if (startTime.isBefore(LocalDateTime.now())) {//проверка
             System.out.println(Error.TIME_BEFORE_NOW);
             return Controller.CALENDAR_ACTION;
         }
         LocalDateTime endTime = timeTaskEnd();
-        if ((endTime.isBefore(LocalDateTime.now()))) {
+        if ((endTime.isBefore(LocalDateTime.now()))) {//проверка
             System.out.println(Error.UNEXPECTED_TIME);
             return Controller.CALENDAR_ACTION;
         }
-        calendar(taskList, startTime, endTime);
+        calendar(taskList, startTime, endTime);//получение календаря с заданиями
         return Controller.MAIN_MENU_ACTION;
     }
 
-    public int taskChoose() {
+    public int taskChoose() {//выбор из пунктов меню
         System.out.println("Calendar");
         System.out.println("1 - calendar (from ... - to ...),  2 - calendar for week, 3 - back to menu");
         int taskType = 0;
@@ -46,17 +46,17 @@ public class CalendarView implements View {
         return taskType;
     }
 
-    public LocalDateTime timeTaskStart() {
+    public LocalDateTime timeTaskStart() {//задать время
         System.out.println("Start date (example: 2021-12-12 12:00)");
         return time();
     }
 
-    public LocalDateTime timeTaskEnd() {
+    public LocalDateTime timeTaskEnd() {//задать время
         System.out.println("End date (example: 2021-12-12 12:00)");
         return time();
     }
 
-    public int calendarFor7Days(AbstractTaskList taskList) {
+    public int calendarFor7Days(AbstractTaskList taskList) {//календарь на 7 дней, от текущего дня
         if (taskList.size() == 0) {
             System.out.println("You dont have any tasks");
             return Controller.MAIN_MENU_ACTION;
@@ -65,11 +65,11 @@ public class CalendarView implements View {
         LocalDateTime startTime = LocalDateTime.now();
         LocalDateTime endTime = startTime.plusDays(7);
         System.out.println("Your calendar from " + startTime.format(formatter) + " to " + endTime.format(formatter));
-        calendar(taskList, startTime, endTime);
+        calendar(taskList, startTime, endTime);//календарь
         return Controller.MAIN_MENU_ACTION;
     }
 
-    private void calendar(AbstractTaskList taskList, LocalDateTime startTime, LocalDateTime endTime) {
+    private void calendar(AbstractTaskList taskList, LocalDateTime startTime, LocalDateTime endTime) {//метод календаря
         SortedMap<LocalDateTime, Set<Task>> calendarView = Tasks.calendar(taskList, startTime, endTime);
         for (SortedMap.Entry<LocalDateTime, Set<Task>> element : calendarView.entrySet()) {
             for (Task task : element.getValue()) {
@@ -79,7 +79,7 @@ public class CalendarView implements View {
         }
     }
 
-    private LocalDateTime time(){
+    private LocalDateTime time(){//время
         String date = "";
         try {
             date = reader.readLine();

@@ -16,7 +16,7 @@ public class AddTaskView implements View{
         return Controller.MAIN_MENU_ACTION;
     }
 
-    public int taskChoose() {
+    public int taskChoose() {//выбор из пунктов меню
         System.out.println("Task type");
         System.out.println("1 - non repeatable");
         System.out.println("2 - repeatable");
@@ -31,7 +31,7 @@ public class AddTaskView implements View{
         return taskType;
     }
 
-    public String nameTask() {
+    public String nameTask() {//задать имя
         System.out.println("Task title");
         String name = "";
         try {
@@ -42,22 +42,22 @@ public class AddTaskView implements View{
         return name;
     }
 
-    public LocalDateTime timeTask() {
+    public LocalDateTime timeTask() {//задать время
         System.out.println("Date (example: 2021-12-12 12:00)");
         return time();
     }
 
-    public LocalDateTime timeTaskStart() {
+    public LocalDateTime timeTaskStart() {//задать время
         System.out.println("Start date (example: 2021-12-12 12:00)");
         return time();
     }
 
-    public LocalDateTime timeTaskEnd() {
+    public LocalDateTime timeTaskEnd() {//задать время
         System.out.println("End date (example: 2021-12-12 12:00)");
         return time();
     }
 
-    public int repeatInterval() {
+    public int repeatInterval() {//задать интервал в минутах
         System.out.println("Enter interval in minutes");
         int interval = 0;
         try {
@@ -69,7 +69,7 @@ public class AddTaskView implements View{
         return interval*60;
     }
 
-    private LocalDateTime time(){
+    private LocalDateTime time(){//время
         String date = "";
         try {
             date = reader.readLine();

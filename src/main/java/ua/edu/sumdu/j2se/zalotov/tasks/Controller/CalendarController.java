@@ -17,17 +17,17 @@ public class CalendarController extends Controller {
     public int process(AbstractTaskList taskList) {
         logger.debug("enter to calendar controller");
         int taskChoose = ((CalendarView) view).taskChoose();
-        if (taskChoose == 1) {
+        if (taskChoose == 1) {//календарь на промежуток времени(от и до)
             logger.debug("see calendar from () to ()");
             return view.printInfo(taskList);
-        } else if (taskChoose == 2) {
+        } else if (taskChoose == 2) {//календарь на неделю
             logger.debug("see calendar for 7 days");
             return  ((CalendarView) view).calendarFor7Days(taskList);
-        }  else if (taskChoose == 3) {
+        }  else if (taskChoose == 3) {//выход в меню
             logger.debug("exit from calendar controller");
             return MAIN_MENU_ACTION;
         } else {
-            System.out.println(Error.WRONG_NUMBER);
+            System.out.println(Error.WRONG_NUMBER);//ошибка введеного значения
             logger.debug("exit from calendar controller");
             return CALENDAR_ACTION;
         }
